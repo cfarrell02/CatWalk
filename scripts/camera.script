@@ -17,8 +17,10 @@ function update(self, dt)
 	-- Calculate the camera's position to center it on the character
 	local camera_position = go.get_position(go.get_id())
 
-	local width = 960
-	local height = 640
+
+	-- This should be dynamically calculated
+	local width = 1920
+	local height = 1080
 	camera_position.x = character_position.x - width/2
 	camera_position.y = character_position.y - height/2
 
