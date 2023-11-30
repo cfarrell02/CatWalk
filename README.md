@@ -121,9 +121,9 @@ Each column of the grading rubric is worth 20% of this assignment.
 
 Please fill in the following information and `commit` and `push`
 
-* Student Number:
-* Name: 
-* GitHub username: 
+* Student Number: 20094046
+* Name: Cian Farrell   
+* GitHub username: cfarrell02
 
 
 
