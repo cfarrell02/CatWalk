@@ -1,6 +1,6 @@
 tile_set: "/assets/street.tilesource"
 layers {
-  id: "layer1"
+  id: "ground"
   z: 0.0
   is_visible: 1
   cell {
@@ -1630,7 +1630,7 @@ layers {
   cell {
     x: 14
     y: -1
-    tile: 16
+    tile: 66
     h_flip: 0
     v_flip: 0
     rotate90: 0
@@ -2817,6 +2817,22 @@ layers {
   z: 0.1
   is_visible: 1
   cell {
+    x: 12
+    y: -6
+    tile: 199
+    h_flip: 0
+    v_flip: 0
+    rotate90: 0
+  }
+  cell {
+    x: 16
+    y: -6
+    tile: 207
+    h_flip: 0
+    v_flip: 0
+    rotate90: 0
+  }
+  cell {
     x: 0
     y: -5
     tile: 98
@@ -2891,7 +2907,7 @@ layers {
   cell {
     x: 16
     y: -5
-    tile: 199
+    tile: 207
     h_flip: 0
     v_flip: 0
     rotate90: 0
@@ -2947,7 +2963,7 @@ layers {
   cell {
     x: 16
     y: -4
-    tile: 183
+    tile: 207
     h_flip: 0
     v_flip: 0
     rotate90: 0
@@ -2979,7 +2995,7 @@ layers {
   cell {
     x: 16
     y: -3
-    tile: 200
+    tile: 207
     h_flip: 0
     v_flip: 0
     rotate90: 0
@@ -3051,7 +3067,7 @@ layers {
   cell {
     x: 12
     y: -1
-    tile: 183
+    tile: 207
     h_flip: 0
     v_flip: 0
     rotate90: 0
@@ -3067,7 +3083,7 @@ layers {
   cell {
     x: 12
     y: 0
-    tile: 187
+    tile: 207
     h_flip: 0
     v_flip: 0
     rotate90: 0
@@ -3076,6 +3092,59 @@ layers {
     x: 1
     y: 2
     tile: 225
+    h_flip: 0
+    v_flip: 0
+    rotate90: 0
+  }
+}
+layers {
+  id: "decorationsElevated"
+  z: 1.0
+  is_visible: 1
+  cell {
+    x: 12
+    y: -6
+    tile: 127
+    h_flip: 0
+    v_flip: 0
+    rotate90: 0
+  }
+  cell {
+    x: 12
+    y: -5
+    tile: 183
+    h_flip: 0
+    v_flip: 0
+    rotate90: 0
+  }
+  cell {
+    x: 12
+    y: -4
+    tile: 200
+    h_flip: 0
+    v_flip: 0
+    rotate90: 0
+  }
+  cell {
+    x: 12
+    y: -2
+    tile: 127
+    h_flip: 0
+    v_flip: 0
+    rotate90: 0
+  }
+  cell {
+    x: 12
+    y: -1
+    tile: 183
+    h_flip: 0
+    v_flip: 0
+    rotate90: 0
+  }
+  cell {
+    x: 12
+    y: 0
+    tile: 187
     h_flip: 0
     v_flip: 0
     rotate90: 0

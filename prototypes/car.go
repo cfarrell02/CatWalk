@@ -1,6 +1,6 @@
 components {
-  id: "catScript"
-  component: "/scripts/catScript.script"
+  id: "car"
+  component: "/scripts/car.script"
   position {
     x: 0.0
     y: 0.0
@@ -16,26 +16,21 @@ components {
 embedded_components {
   id: "sprite"
   type: "sprite"
-  data: "tile_set: \"/assets/cat.tilesource\"\n"
-  "default_animation: \"idleForward\"\n"
+  data: "tile_set: \"/assets/vehicles.tilesource\"\n"
+  "default_animation: \"redCarRight\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "blend_mode: BLEND_MODE_ALPHA\n"
   ""
   position {
     x: 0.0
     y: 0.0
-    z: 0.0
+    z: 0.5
   }
   rotation {
     x: 0.0
     y: 0.0
     z: 0.0
     w: 1.0
-  }
-  scale {
-    x: 0.75
-    y: 0.75
-    z: 1.0
   }
 }
 embedded_components {
@@ -53,7 +48,7 @@ embedded_components {
   "    shape_type: TYPE_BOX\n"
   "    position {\n"
   "      x: 0.0\n"
-  "      y: 0.0\n"
+  "      y: -4.0\n"
   "      z: 0.0\n"
   "    }\n"
   "    rotation {\n"
@@ -65,8 +60,8 @@ embedded_components {
   "    index: 0\n"
   "    count: 3\n"
   "  }\n"
-  "  data: 6.7069216\n"
-  "  data: 6.7901235\n"
+  "  data: 23.6\n"
+  "  data: 10.0\n"
   "  data: 10.0\n"
   "}\n"
   "linear_damping: 0.0\n"

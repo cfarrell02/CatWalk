@@ -3,6 +3,10 @@ function init(self)
 	msg.post(".", "acquire_camera_focus")
 	self.blockSize = 16 -- Change to match block dimensions of level
 	self.speed = 100 -- Adjust speed as needed
+	self.movementCooldown = .1
+	self.currentCooldown = 0
+	self.randomLookDuration = 2 -- Time spent in "look" state (in seconds)
+	self.randomLookCounter = 0
 	self.position = go.get_position()
 	self.nextPosition = go.get_position()
 	self.isMoving = false
@@ -12,7 +16,6 @@ function init(self)
 end
 
 function update(self, dt)
-	self.currentState = "idle"
 	if self.isMoving then
 		self.currentState = "run"
 		local direction = self.nextPosition - self.position
@@ -28,60 +31,89 @@ function update(self, dt)
 		end
 
 		go.set_position(self.position)
+	else
+		if self.currentState == "idle" then
+			local randomIndex = math.random(0,10)
+			if randomIndex == 1 and self.randomLookCounter > self.randomLookDuration*6  then
+				self.randomLookCounter = 0 -- Reset counter
+				self.currentState = "looking"
+			end
+			
+		elseif self.randomLookCounter > self.randomLookDuration or self.currentState ~= "looking" then
+				self.currentState = "idle"
+		end
 	end
 
+
+
 	set_animation(self, self.currentState)
+	self.currentCooldown = self.currentCooldown - dt
+	self.randomLookCounter = self.randomLookCounter + dt
 end
 
 function on_input(self, action_id, action)
-	if action_id == hash("left") and action.pressed then
-		self.nextPosition.x = self.position.x - self.blockSize
-		self.isMoving = true
-		self.direction = "Left" -- Left direction
-	elseif action_id == hash("right") and action.pressed then
-		self.nextPosition.x = self.position.x + self.blockSize
-		self.isMoving = true
-		self.direction = "Right" -- Right direction
-	elseif action_id == hash("up") and action.pressed then
-		self.nextPosition.y = self.position.y + self.blockSize
-		self.isMoving = true
-		self.direction = "Forward" -- Up direction
-	elseif action_id == hash("down") and action.pressed then
-		self.nextPosition.y = self.position.y - self.blockSize
-		self.isMoving = true
-		self.direction = "Backward" -- Down direction
+	if self.currentCooldown <= 0 and not self.isMoving then
+		local newNextPosition = vmath.vector3(self.position.x, self.position.y, self.position.z)
+
+		if action.pressed then
+			local offset = vmath.vector3()
+
+			if action_id == hash("left") then
+				offset.x = -self.blockSize
+				self.direction = "Left"
+			elseif action_id == hash("right") then
+				offset.x = self.blockSize
+				self.direction = "Right"
+			elseif action_id == hash("up") then
+				offset.y = self.blockSize
+				self.direction = "Forward"
+			elseif action_id == hash("down") then
+				offset.y = -self.blockSize
+				self.direction = "Backward"
+			end
+
+			-- Calculate the new position
+			newNextPosition = newNextPosition + offset
+
+			-- Check collision with the next tile
+			local nextTileCollision = physics.raycast(self.position, newNextPosition, { group = hash("barrier") })
+			if nextTileCollision and nextTileCollision.group == hash("barrier") then
+				-- Collider of next tile is a barrier, do not move
+				return
+			end
+
+			-- Calculate the center of the grid cell for the newNextPosition
+			newNextPosition.x = math.floor(newNextPosition.x / self.blockSize) * self.blockSize + self.blockSize / 2
+			newNextPosition.y = math.floor(newNextPosition.y / self.blockSize) * self.blockSize + self.blockSize / 2
+
+			-- Offset the y-position by half of the character's height to center vertically
+			local characterHeight = 32 -- Adjust with the actual height of the character
+			newNextPosition.y = newNextPosition.y + (self.blockSize - characterHeight) / 2
+
+			-- Check if the new position is different from the current position
+			if newNextPosition.x ~= self.position.x or newNextPosition.y ~= self.position.y then
+				self.nextPosition = newNextPosition
+				self.isMoving = true
+				self.currentCooldown = self.movementCooldown
+			end
+		end
 	end
 end
 
 
--- Takes in first part of string name for animation, eg 'idle'
+-- Takes in first part of string name for animation, e.g., 'idle'
 function set_animation(self, animationString)
-	if anim ~= self.currentAnim then
-		sprite.play_flipbook("#sprite",hash(animationString..self.direction))
-		self.current_anim = anim
+	local animHash = hash(animationString .. self.direction)
+	if animHash ~= self.currentAnim then
+		sprite.play_flipbook("#sprite", animHash)
+		self.currentAnim = animHash
 	end
-end
-
-
-
-function fixed_update(self, dt)
-	-- This function is called if 'Fixed Update Frequency' is enabled in the Engine section of game.project
-	-- Can be coupled with fixed updates of the physics simulation if 'Use Fixed Timestep' is enabled in
-	-- Physics section of game.project
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
 end
 
 function on_message(self, message_id, message, sender)
-	-- Add message-handling code here
-	-- Learn more: https://defold.com/manuals/message-passing/
-	-- Remove this function if not needed
-end
-
-
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Learn more: https://defold.com/manuals/hot-reload/
-	-- Remove this function if not needed
+	if message_id == hash("contact_point_response") then
+		if message.group == hash("barrier") then
+			go.set_position(go.get_position() + message.normal * message.distance)
+		end
+	end
 end

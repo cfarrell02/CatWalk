@@ -1,0 +1,319 @@
+image: "/assets/images/vehicles.png"
+tile_width: 48
+tile_height: 32
+tile_margin: 0
+tile_spacing: 0
+collision: "/assets/images/vehicles.png"
+material_tag: "tile"
+convex_hulls {
+  index: 0
+  count: 12
+  collision_group: "car"
+}
+convex_hulls {
+  index: 12
+  count: 12
+  collision_group: "car"
+}
+convex_hulls {
+  index: 24
+  count: 12
+  collision_group: "car"
+}
+convex_hulls {
+  index: 36
+  count: 12
+  collision_group: ""
+}
+convex_hulls {
+  index: 48
+  count: 0
+  collision_group: ""
+}
+convex_hulls {
+  index: 48
+  count: 12
+  collision_group: "car"
+}
+convex_hulls {
+  index: 60
+  count: 12
+  collision_group: "car"
+}
+convex_hulls {
+  index: 72
+  count: 12
+  collision_group: "car"
+}
+convex_hulls {
+  index: 84
+  count: 11
+  collision_group: ""
+}
+convex_hulls {
+  index: 95
+  count: 0
+  collision_group: ""
+}
+convex_hulls {
+  index: 95
+  count: 12
+  collision_group: "car"
+}
+convex_hulls {
+  index: 107
+  count: 12
+  collision_group: "car"
+}
+convex_hulls {
+  index: 119
+  count: 12
+  collision_group: "car"
+}
+convex_hulls {
+  index: 131
+  count: 12
+  collision_group: ""
+}
+convex_hulls {
+  index: 143
+  count: 0
+  collision_group: ""
+}
+convex_hulls {
+  index: 143
+  count: 5
+  collision_group: ""
+}
+convex_hulls {
+  index: 148
+  count: 4
+  collision_group: ""
+}
+convex_hulls {
+  index: 152
+  count: 5
+  collision_group: ""
+}
+convex_hulls {
+  index: 157
+  count: 0
+  collision_group: ""
+}
+convex_hulls {
+  index: 157
+  count: 0
+  collision_group: ""
+}
+convex_hulls {
+  index: 157
+  count: 6
+  collision_group: ""
+}
+convex_hulls {
+  index: 163
+  count: 8
+  collision_group: ""
+}
+convex_hulls {
+  index: 171
+  count: 8
+  collision_group: ""
+}
+convex_hulls {
+  index: 179
+  count: 0
+  collision_group: ""
+}
+convex_hulls {
+  index: 179
+  count: 0
+  collision_group: ""
+}
+convex_hulls {
+  index: 179
+  count: 4
+  collision_group: ""
+}
+convex_hulls {
+  index: 183
+  count: 4
+  collision_group: ""
+}
+convex_hulls {
+  index: 187
+  count: 0
+  collision_group: ""
+}
+convex_hulls {
+  index: 187
+  count: 0
+  collision_group: ""
+}
+convex_hulls {
+  index: 187
+  count: 0
+  collision_group: ""
+}
+convex_hulls {
+  index: 187
+  count: 8
+  collision_group: ""
+}
+convex_hulls {
+  index: 195
+  count: 4
+  collision_group: ""
+}
+convex_hulls {
+  index: 199
+  count: 0
+  collision_group: ""
+}
+convex_hulls {
+  index: 199
+  count: 0
+  collision_group: ""
+}
+convex_hulls {
+  index: 199
+  count: 0
+  collision_group: ""
+}
+convex_hulls {
+  index: 199
+  count: 8
+  collision_group: ""
+}
+convex_hulls {
+  index: 207
+  count: 0
+  collision_group: ""
+}
+convex_hulls {
+  index: 207
+  count: 0
+  collision_group: ""
+}
+convex_hulls {
+  index: 207
+  count: 0
+  collision_group: ""
+}
+convex_hulls {
+  index: 207
+  count: 0
+  collision_group: ""
+}
+collision_groups: "car"
+animations {
+  id: "greenCarBackward"
+  start_tile: 12
+  end_tile: 12
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 1
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "greenCarForward"
+  start_tile: 7
+  end_tile: 7
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 1
+  flip_horizontal: 1
+  flip_vertical: 0
+}
+animations {
+  id: "greenCarLeft"
+  start_tile: 2
+  end_tile: 2
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 1
+  flip_horizontal: 1
+  flip_vertical: 0
+}
+animations {
+  id: "greenCarRight"
+  start_tile: 2
+  end_tile: 2
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 1
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "policeBackward"
+  start_tile: 13
+  end_tile: 13
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 1
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "policeForward"
+  start_tile: 8
+  end_tile: 8
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 1
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "policeLeft"
+  start_tile: 3
+  end_tile: 3
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 1
+  flip_horizontal: 1
+  flip_vertical: 0
+}
+animations {
+  id: "policeRight"
+  start_tile: 3
+  end_tile: 3
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 1
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "redCarBackward"
+  start_tile: 11
+  end_tile: 11
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 1
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "redCarForward"
+  start_tile: 6
+  end_tile: 6
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 1
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "redCarLeft"
+  start_tile: 1
+  end_tile: 1
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 1
+  flip_horizontal: 1
+  flip_vertical: 0
+}
+animations {
+  id: "redCarRight"
+  start_tile: 1
+  end_tile: 1
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 1
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+extrude_borders: 2
+inner_padding: 0
+sprite_trim_mode: SPRITE_TRIM_MODE_OFF
