@@ -1,0 +1,87 @@
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	msg.post(".", "acquire_camera_focus")
+	self.blockSize = 16 -- Change to match block dimensions of level
+	self.speed = 100 -- Adjust speed as needed
+	self.position = go.get_position()
+	self.nextPosition = go.get_position()
+	self.isMoving = false
+	self.currentAnim = hash("")
+	self.direction = "Forward"
+	self.currentState = "idle"
+end
+
+function update(self, dt)
+	self.currentState = "idle"
+	if self.isMoving then
+		self.currentState = "run"
+		local direction = self.nextPosition - self.position
+		local distance = vmath.length(direction)
+		local movement = self.speed * dt
+
+		if movement >= distance then
+			self.position = vmath.vector3(self.nextPosition.x, self.nextPosition.y, self.nextPosition.z)
+			self.isMoving = false
+		else
+			local movementVec = vmath.normalize(direction) * movement
+			self.position = self.position + movementVec
+		end
+
+		go.set_position(self.position)
+	end
+
+	set_animation(self, self.currentState)
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash("left") and action.pressed then
+		self.nextPosition.x = self.position.x - self.blockSize
+		self.isMoving = true
+		self.direction = "Left" -- Left direction
+	elseif action_id == hash("right") and action.pressed then
+		self.nextPosition.x = self.position.x + self.blockSize
+		self.isMoving = true
+		self.direction = "Right" -- Right direction
+	elseif action_id == hash("up") and action.pressed then
+		self.nextPosition.y = self.position.y + self.blockSize
+		self.isMoving = true
+		self.direction = "Forward" -- Up direction
+	elseif action_id == hash("down") and action.pressed then
+		self.nextPosition.y = self.position.y - self.blockSize
+		self.isMoving = true
+		self.direction = "Backward" -- Down direction
+	end
+end
+
+
+-- Takes in first part of string name for animation, eg 'idle'
+function set_animation(self, animationString)
+	if anim ~= self.currentAnim then
+		sprite.play_flipbook("#sprite",hash(animationString..self.direction))
+		self.current_anim = anim
+	end
+end
+
+
+
+function fixed_update(self, dt)
+	-- This function is called if 'Fixed Update Frequency' is enabled in the Engine section of game.project
+	-- Can be coupled with fixed updates of the physics simulation if 'Use Fixed Timestep' is enabled in
+	-- Physics section of game.project
+	-- Add update code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function on_message(self, message_id, message, sender)
+	-- Add message-handling code here
+	-- Learn more: https://defold.com/manuals/message-passing/
+	-- Remove this function if not needed
+end
+
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Learn more: https://defold.com/manuals/hot-reload/
+	-- Remove this function if not needed
+end
