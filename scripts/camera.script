@@ -1,0 +1,34 @@
+function init(self)
+	-- Add initialization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+	msg.post("#camera", "acquire_camera_focus")
+end
+
+function update(self, dt)
+	-- Add update code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+
+	-- Get the position of the character
+	local character_position = go.get_position("character")
+
+	
+	-- Calculate the camera's position to center it on the character
+	local camera_position = go.get_position(go.get_id())
+
+	local width = 960
+	local height = 640
+	camera_position.x = character_position.x - width/2
+	camera_position.y = character_position.y - height/2
+
+
+	go.set_position(camera_position)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("set_view_projection") then
+		self.view = message.view
+		self.projection = message.projection
+	end
+end
