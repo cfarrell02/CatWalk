@@ -145,7 +145,7 @@ embedded_instances {
   "  data: \"aspect_ratio: 1.78\\n"
   "fov: 1.0\\n"
   "near_z: 0.1\\n"
-  "far_z: 10000.0\\n"
+  "far_z: 100.0\\n"
   "auto_aspect_ratio: 1\\n"
   "orthographic_projection: 0\\n"
   "orthographic_zoom: 1.0\\n"

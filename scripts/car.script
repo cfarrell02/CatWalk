@@ -49,8 +49,12 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("set_variables") then
 		-- Check if the message contains the spawn location data
 		if message.speed then
-			-- Set the spawn location variable in the car script
 			self.speed = message.speed
+		end
+		if message.direction then
+			self.direction = message.direction
+			self.currentAnim = hash(self.type..self.direction)
+			sprite.play_flipbook('#sprite', self.currentAnim)
 		end
 	end
 end
