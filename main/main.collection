@@ -143,10 +143,10 @@ embedded_instances {
   "  id: \"camera\"\n"
   "  type: \"camera\"\n"
   "  data: \"aspect_ratio: 1.78\\n"
-  "fov: 0.75\\n"
+  "fov: 1.0\\n"
   "near_z: 0.1\\n"
-  "far_z: 1000.0\\n"
-  "auto_aspect_ratio: 0\\n"
+  "far_z: 10000.0\\n"
+  "auto_aspect_ratio: 1\\n"
   "orthographic_projection: 0\\n"
   "orthographic_zoom: 1.0\\n"
   "\"\n"
@@ -164,8 +164,8 @@ embedded_instances {
   "}\n"
   ""
   position {
-    x: 341.0
-    y: 269.0
+    x: 675.0
+    y: 409.0
     z: 0.0
   }
   rotation {

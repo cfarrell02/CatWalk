@@ -3,7 +3,7 @@ local carSpeed = 80
 
 
 function init(self)
-	self.spawnLocation = vmath.vector3(360,438,0) -- Where the cars come from
+	self.spawnLocation = vmath.vector3(360,436,.2) -- Where the cars come from
 	self.carUrls = {}
 	
 	spawn_car(self)
@@ -30,7 +30,6 @@ end
 
 function spawn_car(self)
 	local car = factory.create("#factory",self.spawnLocation)
-	pprint(car)
 	table.insert(self.carUrls, car)
 	
 	msg.post(car, "set_variables", { speed = carSpeed })

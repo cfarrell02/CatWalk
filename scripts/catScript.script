@@ -116,4 +116,12 @@ function on_message(self, message_id, message, sender)
 			go.set_position(go.get_position() + message.normal * message.distance)
 		end
 	end
+
+	if message_id == hash("collision_response") then
+		if message.group == hash("car") then
+			--Code for death here
+			print("Hit by car!!")
+
+		end
+	end
 end

@@ -19,8 +19,8 @@ function update(self, dt)
 
 
 	-- This should be dynamically calculated
-	local width = 1920
-	local height = 1080
+	local width = 640
+	local height = 480
 	camera_position.x = character_position.x - width/2
 	camera_position.y = character_position.y - height/2
 
