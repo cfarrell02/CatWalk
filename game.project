@@ -20,3 +20,6 @@ default_texture_mag_filter = nearest
 width = 640
 height = 480
 
+[tilemap]
+max_tile_count = 16000
+

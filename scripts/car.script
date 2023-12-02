@@ -14,6 +14,8 @@ function init(self)
 	self.currentAnim = hash(self.type..self.direction)
 
 	sprite.play_flipbook('#sprite', self.currentAnim)
+
+	self.initialZ = go.get_position().z
 	
 
 end
@@ -35,9 +37,9 @@ function update(self, dt)
 	-- Adjusting height of car so character looks infront when below and behind when above
 	local currentPos = go.get_position()
 	if(go.get_position("character").y > currentPos.y) then
-		go.set_position(vmath.vector3(currentPos.x,currentPos.y,.8))
+		go.set_position(vmath.vector3(currentPos.x,currentPos.y,self.initialZ+.4))
 	else
-		go.set_position(vmath.vector3(currentPos.x,currentPos.y,.2))
+		go.set_position(vmath.vector3(currentPos.x,currentPos.y,self.initialZ))
 	end
 		
 	
