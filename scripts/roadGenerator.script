@@ -1,6 +1,6 @@
 local totalFactoryCount = 3
 local yDiff = 112
-local maxRoads = 5
+local maxRoads = 6
 local initialDespawned = false
 	
 
@@ -34,14 +34,13 @@ function update(self, dt)
 			go.delete("/Level")
 			initialDespawned = true
 		end
-		print(self.roadUrls[1])
 		go.delete(self.roadUrls[1])
 		table.remove(self.roadUrls, 1)
 	end
 
 	local playerPos = go.get_position("character")
 
-	if self.currentPos.y - playerPos.y < yDiff then
+	if self.currentPos.y - playerPos.y < yDiff*2 then
 		generate_road(self)
 	end
 end

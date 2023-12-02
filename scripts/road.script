@@ -1,0 +1,62 @@
+local carDriveLength = 500
+local carSpeed = 80
+
+
+function init(self)
+	self.carUrls = {}
+	-- Need better system to choose where vehicles spawn
+	local currentPos = go.get_position()
+	local leftCar = vmath.vector3(currentPos.x-250,currentPos.y-5,.2)
+	local rightCar = vmath.vector3(currentPos.x+300,currentPos.y-30,.2)
+	spawn_car(self,"Right",leftCar, carDriveLength, carSpeed)
+	spawn_car(self,"Left",rightCar, -carDriveLength, -carSpeed)
+
+end
+
+function final(self)
+end
+
+function update(self, dt)
+	for i = #self.carUrls, 1, -1 do
+		local carInfo = self.carUrls[i]
+		local car = carInfo.carUrl
+		local car_position = go.get_position(car)
+		if isBeyondDriveLength(car_position, carInfo) then
+			spawn_car(self,carInfo.carDirection, carInfo.spawnLocation, carDriveLength, carInfo.carSpeed )
+			go.delete(car)
+			table.remove(self.carUrls, i)
+		end
+	end
+end
+
+function on_message(self, message_id, message)
+
+end
+
+function spawn_car(self, direction, spawnLocation, carDriveLength, speed)
+	-- print("Creating car at "..spawnLocation)
+	local minSpeed = speed*.8
+	local maxSpeed = speed*1.2
+	local newSpeed = 0
+
+	if minSpeed < maxSpeed then
+		newSpeed = math.random(minSpeed, maxSpeed)
+	else
+		newSpeed = math.random(maxSpeed, minSpeed)
+	end
+	
+	local car = factory.create("#factory",spawnLocation)
+	local carInfo = {carUrl = car, spawnLocation = spawnLocation, carDriveLength = carDriveLength, carDirection = direction, carSpeed = speed}
+	table.insert(self.carUrls, carInfo)
+	msg.post(car, "set_variables", { speed = newSpeed, direction = direction})
+end
+
+function isBeyondDriveLength(currentPosition, carInfo) 
+	if carInfo.carDirection == "Right" then
+		return currentPosition.x >  carInfo.spawnLocation.x + carInfo.carDriveLength
+	elseif carInfo.carDirection == "Left" then
+		return currentPosition.x < carInfo.spawnLocation.x - carInfo.carDriveLength
+	end
+
+	return false
+end
