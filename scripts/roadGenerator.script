@@ -1,4 +1,4 @@
-local totalFactoryCount = 3
+local totalFactoryCount = 5
 local yDiff = 112
 local maxRoads = 6
 local initialDespawned = false
