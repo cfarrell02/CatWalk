@@ -9,7 +9,7 @@ function init(self)
 
 	self.maxY = 2000
 
-	self.direction = "Right" --TODO, modify to be passed in on creation in factory
+	self.direction = "Right" 
 
 	self.currentAnim = hash(self.type..self.direction)
 
@@ -33,6 +33,7 @@ function update(self, dt)
 		go.set_position(go.get_position() + vmath.vector3(self.speed*dt,0,0))
 	end
 
+	print(self.speed)
 
 	-- Adjusting height of car so character looks infront when below and behind when above
 	local currentPos = go.get_position()
