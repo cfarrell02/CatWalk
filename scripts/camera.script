@@ -3,6 +3,7 @@ function init(self)
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
 	msg.post("#camera", "acquire_camera_focus")
+	self.xPos = go.get_position("Level").x
 end
 
 function update(self, dt)
@@ -21,7 +22,8 @@ function update(self, dt)
 	-- This should be dynamically calculated
 	local width = 640
 	local height = 480
-	camera_position.x = character_position.x - width/2
+	--camera_position.x = character_position.x - width/2
+	camera_position.x = self.xPos - width/2
 	camera_position.y = character_position.y - height/2
 
 

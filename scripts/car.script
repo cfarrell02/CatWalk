@@ -33,7 +33,7 @@ function update(self, dt)
 		go.set_position(go.get_position() + vmath.vector3(self.speed*dt,0,0))
 	end
 
-	print(self.speed)
+	--print(self.speed)
 
 	-- Adjusting height of car so character looks infront when below and behind when above
 	local currentPos = go.get_position()
