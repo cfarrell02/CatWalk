@@ -1,9 +1,13 @@
+local gesture = require "in.gesture"
+
 function init(self)
 	msg.post(".", "acquire_input_focus")
 	msg.post(".", "acquire_camera_focus")
+	gesture.SETTINGS.double_tap_interval = 1
+	gesture.SETTINGS.multi_touch = false
 	self.blockSize = 16 -- Change to match block dimensions of level
 	self.speed = 100 -- Adjust speed as needed
-	self.movementCooldown = .1
+	self.movementCooldown = .01
 	self.currentCooldown = 0
 	self.randomLookDuration = 2 -- Time spent in "look" state (in seconds)
 	self.randomLookCounter = 0
@@ -13,6 +17,8 @@ function init(self)
 	self.currentAnim = hash("")
 	self.direction = "Forward"
 	self.currentState = "idle"
+
+	
 end
 
 function update(self, dt)
@@ -52,24 +58,24 @@ function update(self, dt)
 end
 
 function on_input(self, action_id, action)
-	if self.currentCooldown <= 0 and not self.isMoving then
-		local newNextPosition = vmath.vector3(self.position.x, self.position.y, self.position.z)
-
-		if action.pressed then
+	local g = gesture.on_input(self, action_id, action)
+		if g then
+		if self.currentCooldown <= 0 and not self.isMoving then
+			local newNextPosition = vmath.vector3(self.position.x, self.position.y, self.position.z)
 			local offset = vmath.vector3()
-
-			if action_id == hash("left") then
-				offset.x = -self.blockSize
-				self.direction = "Left"
-			elseif action_id == hash("right") then
+			if g.swipe_right then
 				offset.x = self.blockSize
 				self.direction = "Right"
-			elseif action_id == hash("up") then
-				offset.y = self.blockSize
-				self.direction = "Forward"
-			elseif action_id == hash("down") then
+			elseif g.swipe_left then
+				offset.x = -self.blockSize
+				self.direction = "Left"
+			elseif g.swipe_down then
 				offset.y = -self.blockSize
 				self.direction = "Backward"
+			elseif g.swipe_up or g.tap or g.long_press or g.double_tap then
+				--Any other kind of touch, move forward
+				offset.y = self.blockSize
+				self.direction = "Forward"
 			end
 
 			-- Calculate the new position
@@ -97,6 +103,7 @@ function on_input(self, action_id, action)
 				self.currentCooldown = self.movementCooldown
 			end
 		end
+
 	end
 end
 
@@ -121,7 +128,28 @@ function on_message(self, message_id, message, sender)
 		if message.group == hash("car") then
 			--Code for death here
 			print("Hit by car!!")
+			msg.post("/controller#controller", "show_death")
 
+		end
+	end
+
+	if message_id == hash("on_gesture") then
+		pprint(message)
+		if message.swipe_right then
+			offset.x = self.blockSize
+			self.direction = "Right"
+		elseif message.tap then
+			offset.y = self.blockSize
+			self.direction = "Forward"
+		elseif message.swipe_left then
+			offset.x = -self.blockSize
+			self.direction = "Left"
+		elseif message.swipe_up then
+			offset.y = self.blockSize
+			self.direction = "Forward"
+		elseif message.swipe_down then
+			offset.y = -self.blockSize
+			self.direction = "Backward"
 		end
 	end
 end

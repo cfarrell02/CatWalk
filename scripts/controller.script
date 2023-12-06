@@ -16,9 +16,15 @@ function init(self)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("show_main") then
+	if message_id == hash("show_start") then
+		self.current_proxy = sender
+		show(self, "#startproxy")
+	elseif message_id == hash("show_main")then
 		self.current_proxy = sender
 		show(self, "#mainproxy")
+	elseif message_id == hash("show_death")then
+		self.current_proxy = sender
+		show(self, "#deathproxy")
 	elseif message_id == hash("proxy_loaded") then
 		show(self, sender)
 		self.current_proxy = sender

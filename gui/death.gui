@@ -1,4 +1,4 @@
-script: "/scripts/menu.gui_script"
+script: ""
 fonts {
   name: "system_font"
   font: "/builtins/fonts/system_font.font"
@@ -11,8 +11,8 @@ background_color {
 }
 nodes {
   position {
-    x: 193.0
-    y: 602.0
+    x: 194.0
+    y: 616.0
     z: 0.0
     w: 1.0
   }
@@ -23,8 +23,8 @@ nodes {
     w: 1.0
   }
   scale {
-    x: 4.0
-    y: 4.0
+    x: 1.0
+    y: 1.0
     z: 1.0
     w: 1.0
   }
@@ -42,10 +42,9 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "Cat Walk\n"
-  ""
+  text: "You Died!"
   font: "system_font"
-  id: "title"
+  id: "text"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
@@ -78,8 +77,8 @@ nodes {
 }
 nodes {
   position {
-    x: 192.0
-    y: 450.0
+    x: 196.0
+    y: 210.0
     z: 0.0
     w: 1.0
   }
@@ -102,7 +101,7 @@ nodes {
     w: 1.0
   }
   color {
-    x: 0.8
+    x: 1.0
     y: 1.0
     z: 1.0
     w: 1.0
@@ -110,9 +109,9 @@ nodes {
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
   texture: ""
-  id: "start"
+  id: "continue"
   xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_TOP
+  yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
   adjust_mode: ADJUST_MODE_FIT
   layer: ""
@@ -167,10 +166,10 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "Start\n"
+  text: "Continue\n"
   ""
   font: "system_font"
-  id: "text"
+  id: "text1"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
@@ -188,7 +187,7 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
-  parent: "start"
+  parent: "continue"
   layer: ""
   inherit_alpha: true
   alpha: 1.0

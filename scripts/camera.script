@@ -20,12 +20,23 @@ function update(self, dt)
 
 
 	-- This should be dynamically calculated
-	local width = 640
-	local height = 480
-	--camera_position.x = character_position.x - width/2
-	camera_position.x = self.xPos - width/2
+	local width = 393
+	local height = 852
+
+	camera_position.x = character_position.x - width/2
+	if camera_position.x < 323.5 then
+		camera_position.x = 323.5
+	elseif camera_position.x > 419.5 then
+		camera_position.x = 419.5
+	end
+	--camera_position.x = self.xPos - width/2 + 45
 	camera_position.y = character_position.y - height/2
 
+	if camera_position.y < 294 then
+		camera_position.y = 294
+	end
+	
+	pprint(camera_position)
 
 	go.set_position(camera_position)
 end

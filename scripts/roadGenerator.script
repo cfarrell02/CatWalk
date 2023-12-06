@@ -1,6 +1,7 @@
 local totalFactoryCount = 5
 local yDiff = 112
-local maxRoads = 6
+local maxRoads = 10
+local viewDistanceMultipier = 4
 local initialDespawned = false
 	
 
@@ -18,6 +19,12 @@ function init(self)
 	end
 
 	msg.post(".", "acquire_input_focus")
+
+	-- Initial load of levels
+
+	for i = 1,8 do
+		generate_road(self)
+	end
 	
 	
 end
@@ -40,7 +47,7 @@ function update(self, dt)
 
 	local playerPos = go.get_position("character")
 
-	if self.currentPos.y - playerPos.y < yDiff*2 then
+	if self.currentPos.y - playerPos.y < yDiff*viewDistanceMultipier then
 		generate_road(self)
 	end
 end
