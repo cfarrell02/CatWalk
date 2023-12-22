@@ -7,6 +7,20 @@ function init(self)
 
 	self.startButton = gui.get_node("start")
 	self.highScoreText = gui.get_node("high_score")
+	self.selectedDifficulty = "normal"
+	self.easyButton = gui.get_node("easy")
+	self.normalButton = gui.get_node("normal")
+	self.hardButton = gui.get_node("hard")
+
+	self.difficultyButtons = {{name = "easy",button = gui.get_node("easy"), {name = "normal"
+	,button = gui.get_node("normal")},{name = "hard",button = gui.get_node("hard")}} 
+	
+	
+	gui.set_color(self.easyButton, vmath.vector4(.7451,1,1,1))
+	gui.set_color(self.normalButton, vmath.vector4(1,1,1,1))
+	gui.set_color(self.hardButton, vmath.vector4(.7451,1,1,1))
+	gui.set_color(self.startButton, vmath.vector4(.7451,1,1,1))
+	
 end
 
 function final(self)
@@ -30,11 +44,11 @@ end
 
 function on_input(self, action_id, action)
 	if action_id == hash("touch") and action.pressed then
-		local startButton = gui.get_node("start")
-		local button_pressed = gui.pick_node(startButton, action.x, action.y)
+		local button_pressed = gui.pick_node(self.startButton, action.x, action.y)
 		if button_pressed then
 			msg.post("main:/controller#controller", "show_main")
 		end
+		
 	end
 end
 
