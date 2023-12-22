@@ -1,0 +1,39 @@
+local cloudXStart = -100
+local cloudXEnd = 600
+local cloudFactories = { "factory1", "factory2", "factory3" }
+
+function init(self)
+	-- Add initialization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+	self.clouds = {}
+	math.randomseed(os.time())
+end
+
+function create_cloud(self)
+	local factory = cloudFactories[math.random(1, #cloudFactories)]
+	local pos = vmath.vector3(cloudXStart, math.random(100, 400), 0)
+	print("#"..factory)
+	print(pos)
+	local cloud = factory.create("#"..factory,pos)
+	table.insert(self.clouds, cloud)
+end
+
+function update(self, dt)
+	-- Add update code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+	for i, cloud in ipairs(self.clouds) do
+		local pos = go.get_position(cloud)
+		pos.x = pos.x + 50 * dt -- Change speed as needed
+		go.set_position(pos, cloud)
+		if pos.x >= cloudXEnd then 
+			go.delete(cloud)
+			table.remove(self.clouds, i)
+		end
+	end
+
+	if #self.clouds < 5 then
+		create_cloud(self)
+	end
+end

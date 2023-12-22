@@ -6,6 +6,7 @@ function init(self)
 	msg.post(".", "acquire_input_focus")
 
 	self.startButton = gui.get_node("start")
+	self.highScoreText = gui.get_node("high_score")
 end
 
 function final(self)
@@ -21,9 +22,10 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	-- Add message-handling code here
-	-- Learn more: https://defold.com/manuals/message-passing/
-	-- Remove this function if not needed
+	if message_id == hash("update_high_score") then
+		pprint(message.highScore)
+		gui.set_text(self.highScoreText, "Highscore: ".. message.highScore)
+	end
 end
 
 function on_input(self, action_id, action)
@@ -31,8 +33,8 @@ function on_input(self, action_id, action)
 		local startButton = gui.get_node("start")
 		local button_pressed = gui.pick_node(startButton, action.x, action.y)
 		if button_pressed then
-			msg.post("/controller#controller", "show_main")
-				end
+			msg.post("main:/controller#controller", "show_main")
+		end
 	end
 end
 

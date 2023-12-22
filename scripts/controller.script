@@ -1,36 +1,54 @@
 local function show(self, proxy)
 	if self.current_proxy then
+		msg.post(self.current_proxy, "disable")
 		msg.post(self.current_proxy, "unload")
-		self.current_proxy = nil
 	end
 
+	print(proxy)
 	msg.post(proxy, "load")
-
-	--Delete gui
-	go.delete('/gui')
+	self.current_proxy = proxy
+	self.score = 0
+	
 end
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
 	self.current_proxy = nil
+	msg.post('#', 'show_start')
+	self.score = 0
+	self.highScore = self.score
+	
+end
+
+function update(self)
+	if self.current_proxy == "#startproxy" then
+		msg.post("launchScreen:/gui#menu", "update_high_score",{highScore=self.highScore})
+	end
 end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("show_start") then
-		self.current_proxy = sender
 		show(self, "#startproxy")
-	elseif message_id == hash("show_main")then
-		self.current_proxy = sender
+	elseif message_id == hash("show_main") then
 		show(self, "#mainproxy")
-	elseif message_id == hash("show_death")then
-		self.current_proxy = sender
+	elseif message_id == hash("show_death") then
 		show(self, "#deathproxy")
 	elseif message_id == hash("proxy_loaded") then
-		show(self, sender)
-		self.current_proxy = sender
 		msg.post(sender, "enable")
 	elseif message_id == hash("proxy_unloaded") then
 		print("Unloaded", sender)
 		-- Additional handling if needed after unloading the proxy
+	elseif message_id == hash("score_update") then
+		self.score = message.score
+		if self.highScore < self.score then
+			self.highScore = self.score
+		end
+		msg.post("game:/hud#hud", "score_update",{score=self.score})
+	elseif message_id == hash("score_increment") then
+		self.score = self.score + 1
+		if self.highScore < self.score then
+			self.highScore = self.score
+		end
+		msg.post("game:/hud#hud", "score_update",{score=self.score})
 	end
 end

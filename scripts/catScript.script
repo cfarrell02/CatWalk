@@ -1,4 +1,5 @@
 local gesture = require "in.gesture"
+local roadY = 112
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
@@ -17,6 +18,7 @@ function init(self)
 	self.currentAnim = hash("")
 	self.direction = "Forward"
 	self.currentState = "idle"
+	self.currentY=go.get_position().y
 
 	
 end
@@ -48,6 +50,12 @@ function update(self, dt)
 		elseif self.randomLookCounter > self.randomLookDuration or self.currentState ~= "looking" then
 				self.currentState = "idle"
 		end
+	end
+
+	if go.get_position().y - roadY > self.currentY then
+		--Code for when a new road has been passed
+		msg.post("main:/controller#controller", "score_increment")
+		self.currentY = go.get_position().y
 	end
 
 
@@ -128,8 +136,7 @@ function on_message(self, message_id, message, sender)
 		if message.group == hash("car") then
 			--Code for death here
 			print("Hit by car!!")
-			msg.post("/controller#controller", "show_death")
-
+			msg.post("main:/controller#controller", "show_death")
 		end
 	end
 
