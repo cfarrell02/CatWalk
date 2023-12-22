@@ -19,8 +19,6 @@ function init(self)
 	self.direction = "Forward"
 	self.currentState = "idle"
 	self.currentY=go.get_position().y
-
-	
 end
 
 function update(self, dt)
@@ -126,6 +124,11 @@ function set_animation(self, animationString)
 end
 
 function on_message(self, message_id, message, sender)
+
+	if message_id == hash("death")then
+		msg.post("main:/controller#controller", "show_death")
+	end
+	
 	if message_id == hash("contact_point_response") then
 		if message.group == hash("barrier") then
 			go.set_position(go.get_position() + message.normal * message.distance)

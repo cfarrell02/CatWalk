@@ -1,15 +1,18 @@
+local speed = 10
 function init(self)
 	-- Add initialization code here
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
 	msg.post("#camera", "acquire_camera_focus")
 	self.xPos = go.get_position("Level").x
+	self.yPos = go.get_position("character").y
 end
 
 function update(self, dt)
 	-- Add update code here
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
+	self.yPos = self.yPos + speed*dt
 
 	-- Get the position of the character
 	local character_position = go.get_position("character")
@@ -30,14 +33,22 @@ function update(self, dt)
 		camera_position.x = 419.5
 	end
 	--camera_position.x = self.xPos - width/2 + 45
-	camera_position.y = character_position.y - height/2
+	-- camera_position.y = character_position.y - height/2
+	camera_position.y = self.yPos
+
+	if character_position.y - height/2 > camera_position.y then
+		camera_position.y = character_position.y - height/2
+		self.yPos = character_position.y - height/2
+	end
+
+	if character_position.y < camera_position.y - 20 then
+		msg.post("character#catScript", "death")
+	end
 
 	if camera_position.y < 294 then
 		camera_position.y = 294
 	end
 	
-	pprint(camera_position)
-
 	go.set_position(camera_position)
 end
 
