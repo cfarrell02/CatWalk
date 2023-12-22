@@ -17,6 +17,8 @@ function init(self)
 	msg.post('#', 'show_start')
 	self.score = 0
 	self.highScore = self.score
+
+		
 	
 end
 
@@ -50,5 +52,9 @@ function on_message(self, message_id, message, sender)
 			self.highScore = self.score
 		end
 		msg.post("game:/hud#hud", "score_update",{score=self.score})
+
+		if message_id == "play_button_sound" then
+			sound.play("button", {delay = 0, gain =1,pan = 0, speed = 1})
+		end
 	end
 end

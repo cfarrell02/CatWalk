@@ -19,6 +19,9 @@ function init(self)
 	self.direction = "Forward"
 	self.currentState = "idle"
 	self.currentY=go.get_position().y
+
+	sound.play("#music", {delay = 0, gain =0.1,pan = 0, speed = 1})
+	
 end
 
 function update(self, dt)
@@ -69,21 +72,26 @@ function on_input(self, action_id, action)
 		if self.currentCooldown <= 0 and not self.isMoving then
 			local newNextPosition = vmath.vector3(self.position.x, self.position.y, self.position.z)
 			local offset = vmath.vector3()
+			local gain = .05
 			if g.swipe_right then
+				sound.play("#sound", {delay = 0, gain = gain, pan = 0, speed = 1})
 				offset.x = self.blockSize
 				self.direction = "Right"
 			elseif g.swipe_left then
+				sound.play("#sound", {delay = 0, gain = gain, pan = 0, speed = 1})
 				offset.x = -self.blockSize
 				self.direction = "Left"
 			elseif g.swipe_down then
+				sound.play("#sound", {delay = 0, gain = gain, pan = 0, speed = 1})
 				offset.y = -self.blockSize
 				self.direction = "Backward"
 			elseif g.swipe_up or g.tap or g.long_press or g.double_tap then
 				--Any other kind of touch, move forward
+				sound.play("#sound", {delay = 0, gain = gain, pan = 0, speed = 1})
 				offset.y = self.blockSize
 				self.direction = "Forward"
 			end
-
+			
 			-- Calculate the new position
 			newNextPosition = newNextPosition + offset
 
@@ -126,6 +134,7 @@ end
 function on_message(self, message_id, message, sender)
 
 	if message_id == hash("death")then
+		sound.play("#scream", {delay = 0, gain =0.1,pan = 0, speed = 1})
 		msg.post("main:/controller#controller", "show_death")
 	end
 	
@@ -139,6 +148,7 @@ function on_message(self, message_id, message, sender)
 		if message.group == hash("car") then
 			--Code for death here
 			print("Hit by car!!")
+			sound.play("#scream", {delay = 0, gain =0.1,pan = 0, speed = 1})
 			msg.post("main:/controller#controller", "show_death")
 		end
 	end

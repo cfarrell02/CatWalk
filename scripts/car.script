@@ -16,8 +16,12 @@ function init(self)
 	sprite.play_flipbook('#sprite', self.currentAnim)
 
 	self.initialZ = go.get_position().z
-	
 
+	sound.play("#sound", {delay = 0, gain =.005,pan = 0, speed = 1})
+	if self.type == "police" and math.random(0,1) == 1 then
+		sound.play("#siren", {delay = 0, gain =.2,pan = 0, speed = 1})
+	
+	end
 end
 
 
@@ -64,7 +68,8 @@ end
 
 
 function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+	sound.stop("#sound")
+	sound.stop("#siren")
+	
+	
 end

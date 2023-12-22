@@ -22,5 +22,8 @@ width = 393
 height = 852
 
 [tilemap]
-max_tile_count = 16000
+max_tile_count = 24000
+
+[sound]
+max_component_count = 128
 
