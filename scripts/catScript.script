@@ -134,13 +134,16 @@ end
 function on_message(self, message_id, message, sender)
 
 	if message_id == hash("death")then
-		sound.play("#scream", {delay = 0, gain =1,pan = 0, speed = 1})
+		-- sound.play("#scream", {delay = 0, gain =1,pan = 0, speed = 1})
 		msg.post("main:/controller#controller", "show_death")
 	end
-	
+
 	if message_id == hash("contact_point_response") then
 		if message.group == hash("barrier") then
 			go.set_position(go.get_position() + message.normal * message.distance)
+		elseif message.group == hash("pizza") then
+			go.delete(message.other_id)
+			msg.post("main:/controller#controller", "score_increment", {amount = 10})
 		end
 	end
 
@@ -148,8 +151,9 @@ function on_message(self, message_id, message, sender)
 		if message.group == hash("car") then
 			--Code for death here
 			print("Hit by car!!")
-			sound.play("#scream", {delay = 0, gain =0.1,pan = 0, speed = 1})
+			-- sound.play("#scream", {delay = 0, gain =0.1,pan = 0, speed = 1})
 			msg.post("main:/controller#controller", "show_death")
+
 		end
 	end
 

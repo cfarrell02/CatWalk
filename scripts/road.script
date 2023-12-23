@@ -11,6 +11,13 @@ function init(self)
 	self.rightCar = vmath.vector3(currentPos.x + 320, currentPos.y - 30, 0.2)
 	self.carCooldown = math.random(minCarSpawn, maxCarSpawn)
 	self.isMovingRight = true
+	msg.post('#', "spawn_pizza")
+end
+
+function on_message(self, message_id, message) 
+	if message_id == hash("spawn_pizza")then
+		spawnPizza(self)
+	end
 end
 
 function update(self, dt)
@@ -53,4 +60,28 @@ function isBeyondDriveLength(currentPosition, carInfo)
 	end
 
 	return false
+end
+function spawnPizza(self)
+	local gridSpacing = 16 -- Size of each grid
+	local roadWidth = 100 -- Assuming the road width
+
+	-- Calculate the area where pizza can spawn
+	local minX = -roadWidth * gridSpacing / 2
+	local maxX = roadWidth * gridSpacing / 2
+	local minY = self.leftCar.y - 8 -- Adjust as needed
+	local maxY = self.leftCar.y + 8 -- Adjust as needed
+
+	-- Try to generate a valid spawn position
+	local collision = true
+	local pizzaPos
+	while collision do
+		-- Generate random position within the valid area
+		pizzaPos = vmath.vector3(math.random(minX, maxX), math.random(minY, maxY), .2)
+
+		-- Check for colliders at the position
+		collision = physics.raycast(pizzaPos, pizzaPos, { group = hash("barrier") })
+	end
+
+	-- Create a unique identifier for the pizza instance
+	local pizzaInstance = factory.create("#pizza_factory", pizzaPos)
 end

@@ -31,9 +31,9 @@ function update(self, dt)
 		table.remove(self.visibleRoads, 1)
 	end
 
-	local playerPosition = go.get_position("character")
+	local playerPosition = go.get_position("camera")
 
-	if self.currentPosition.y - playerPosition.y < roadSegmentDistance * viewDistanceMultiplier then
+	if self.currentPosition.y - (playerPosition.y+300) < roadSegmentDistance * viewDistanceMultiplier then
 		generateRoadSegment(self)
 	end
 end

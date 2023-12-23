@@ -22,7 +22,8 @@ function init(self)
 		easy = 10,
 		normal = 20,
 		hard = 30
-	}	
+	}
+	load(self)	
 	
 end
 
@@ -74,7 +75,7 @@ function on_message(self, message_id, message, sender)
 		end
 		msg.post("game:/hud#hud", "score_update",{score=self.score})
 	elseif message_id == hash("score_increment") then
-		self.score = self.score + 1
+		self.score = self.score + (message.amount or 1)
 		if self.highScore < self.score then
 			self.highScore = self.score
 		end
