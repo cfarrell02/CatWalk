@@ -1,6 +1,6 @@
 components {
   id: "road1"
-  component: "/assets/roads/road6.tilemap"
+  component: "/assets/roads/road5.tilemap"
   position {
     x: 0.0
     y: 0.0
@@ -31,7 +31,7 @@ components {
 embedded_components {
   id: "collisionobject"
   type: "collisionobject"
-  data: "collision_shape: \"/assets/roads/road6.tilemap\"\n"
+  data: "collision_shape: \"/assets/roads/road5.tilemap\"\n"
   "type: COLLISION_OBJECT_TYPE_STATIC\n"
   "mass: 0.0\n"
   "friction: 0.1\n"

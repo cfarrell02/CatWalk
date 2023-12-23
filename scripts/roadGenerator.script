@@ -1,4 +1,4 @@
-local totalRoadFactories = 5
+local totalRoadFactories = 10
 local roadSegmentDistance = 112
 local maxVisibleRoads = 10
 local viewDistanceMultiplier = 4
