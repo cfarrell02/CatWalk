@@ -1,24 +1,16 @@
 local carDriveLength = 550
 local carSpeed = 80
-local minCarSpawn = .8
+local minCarSpawn = 0.8
 local maxCarSpawn = 3
-
 
 function init(self)
 	self.carUrls = {}
-	carSpeed = go.get_position().y  * .15
+	carSpeed = go.get_position().y * 0.15
 	local currentPos = go.get_position()
-	self.leftCar = vmath.vector3(currentPos.x-250,currentPos.y-5,.2)
-	self.rightCar = vmath.vector3(currentPos.x+320,currentPos.y-30,.2)
-	-- spawn_car(self,"Right",self.leftCar, carDriveLength, carSpeed)
-	-- spawn_car(self,"Left",self.rightCar, carDriveLength, -carSpeed)
-
+	self.leftCar = vmath.vector3(currentPos.x - 250, currentPos.y - 5, 0.2)
+	self.rightCar = vmath.vector3(currentPos.x + 320, currentPos.y - 30, 0.2)
 	self.carCooldown = math.random(minCarSpawn, maxCarSpawn)
-	self.isMovingRight = true	
-
-end
-
-function final(self)
+	self.isMovingRight = true
 end
 
 function update(self, dt)
@@ -27,7 +19,6 @@ function update(self, dt)
 		local car = carInfo.carUrl
 		local car_position = go.get_position(car)
 		if isBeyondDriveLength(car_position, carInfo) then
-			--spawn_car(self,carInfo.carDirection, carInfo.spawnLocation, carDriveLength, carInfo.carSpeed )
 			go.delete(car)
 			table.remove(self.carUrls, i)
 		end
@@ -39,7 +30,7 @@ function update(self, dt)
 		else
 			spawn_car(self, "Left", self.rightCar, carDriveLength, -carSpeed)
 		end
-		
+
 		self.carCooldown = math.random(minCarSpawn, maxCarSpawn)
 		self.isMovingRight = not self.isMovingRight
 	end
@@ -47,21 +38,16 @@ function update(self, dt)
 	self.carCooldown = self.carCooldown - dt
 end
 
-function on_message(self, message_id, message)
-
-end
-
 function spawn_car(self, direction, spawnLocation, carDriveLength, speed)
-	-- print("Creating car at "..spawnLocation)
-	local car = factory.create("#factory",spawnLocation)
-	local carInfo = {carUrl = car, spawnLocation = spawnLocation, carDriveLength = carDriveLength, carDirection = direction, carSpeed = speed}
+	local car = factory.create("#factory", spawnLocation)
+	local carInfo = { carUrl = car, spawnLocation = spawnLocation, carDriveLength = carDriveLength, carDirection = direction, carSpeed = speed }
 	table.insert(self.carUrls, carInfo)
-	msg.post(car, "set_variables", { speed = speed, direction = direction})
+	msg.post(car, "set_variables", { speed = speed, direction = direction })
 end
 
-function isBeyondDriveLength(currentPosition, carInfo) 
+function isBeyondDriveLength(currentPosition, carInfo)
 	if carInfo.carDirection == "Right" then
-		return currentPosition.x >  carInfo.spawnLocation.x + carInfo.carDriveLength
+		return currentPosition.x > carInfo.spawnLocation.x + carInfo.carDriveLength
 	elseif carInfo.carDirection == "Left" then
 		return currentPosition.x < carInfo.spawnLocation.x - carInfo.carDriveLength
 	end

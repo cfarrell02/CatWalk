@@ -134,7 +134,7 @@ end
 function on_message(self, message_id, message, sender)
 
 	if message_id == hash("death")then
-		sound.play("#scream", {delay = 0, gain =0.1,pan = 0, speed = 1})
+		sound.play("#scream", {delay = 0, gain =1,pan = 0, speed = 1})
 		msg.post("main:/controller#controller", "show_death")
 	end
 	

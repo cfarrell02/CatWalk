@@ -1,46 +1,64 @@
-
 function init(self)
-	-- Add initialization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
 	msg.post(".", "acquire_input_focus")
 
 	self.startButton = gui.get_node("start")
 	self.highScoreText = gui.get_node("high_score")
+
+	self.difficultyButtons = {
+		{name = "easy", button = gui.get_node("easy")},
+		{name = "normal", button = gui.get_node("normal")},
+		{name = "hard", button = gui.get_node("hard")}
+	}
+
+    setButtonColors(self)
+	-- setDifficulty(self,self.selectedDifficulty)
+	-- gui.set_color(self.difficultyButtons[2], vmath.vector4(0.7451, 1, 1, 1))
+	
 end
 
-function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+function setDifficulty(self, difficulty)
+	self.selectedDifficulty = difficulty
+	msg.post("main:/controller#controller","set_difficulty",{difficulty = difficulty})
+
+	-- Set the selected difficulty button color
+	for _, button in ipairs(self.difficultyButtons) do
+		local color = vmath.vector4(0.7451, 1, 1, 1)
+		if button.name == difficulty then
+			color = vmath.vector4(1, 1, 1, 1)
+		end
+		gui.set_color(button.button, color)
+	end
 end
 
-function update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function on_message(self, message_id, message, sender)
-	if message_id == hash("update_high_score") then
-		pprint(message.highScore)
-		gui.set_text(self.highScoreText, "Highscore: ".. message.highScore)
+function setButtonColors(self)
+	-- Set initial button colors
+	for _, button in ipairs(self.difficultyButtons) do
+		gui.set_color(button.button, vmath.vector4(0.7451, 1, 1, 1))
 	end
 end
 
 function on_input(self, action_id, action)
 	if action_id == hash("touch") and action.pressed then
-		local startButton = gui.get_node("start")
-		local button_pressed = gui.pick_node(startButton, action.x, action.y)
-		if button_pressed then
+		local buttonPressed = gui.pick_node(self.startButton, action.x, action.y)
+		if buttonPressed then
+			msg.post("main:/controller#controller", "play_button_sound")
 			msg.post("main:/controller#controller", "show_main")
+		else
+			for _, button in ipairs(self.difficultyButtons) do
+				if gui.pick_node(button.button, action.x, action.y) then
+					msg.post("main:/controller#controller", "play_button_sound")
+					setDifficulty(self,button.name)
+					break
+				end
+			end
 		end
 	end
 end
 
-
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Learn more: https://defold.com/manuals/hot-reload/
-	-- Remove this function if not needed
+function on_message(self, message_id, message, sender)
+	if message_id == hash("update_high_score") then
+		gui.set_text(self.highScoreText, "Highscore: " .. message.highScore)
+	elseif message_id == hash("set_difficulty") then
+		setDifficulty(self, message.difficulty)
+	end
 end

@@ -31,6 +31,8 @@ function on_input(self, action_id, action)
 		local startButton = gui.get_node("continue")
 		local button_pressed = gui.pick_node(startButton, action.x, action.y)
 		if button_pressed then
+			msg.post("main:/controller#controller", "play_button_sound")
+			
 			msg.post("main:/controller#controller", "show_start")
 				end
 	end

@@ -70,7 +70,7 @@ embedded_components {
 embedded_components {
   id: "button"
   type: "sound"
-  data: "sound: \"/sounds/jump.wav\"\n"
+  data: "sound: \"/sounds/button.wav\"\n"
   "looping: 0\n"
   "group: \"master\"\n"
   "gain: 1.0\n"
