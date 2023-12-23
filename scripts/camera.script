@@ -1,9 +1,10 @@
-local speed = 10
+
 function init(self)
 	-- Add initialization code here
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
 	msg.post("#camera", "acquire_camera_focus")
+	self.speed = 10;
 	self.xPos = go.get_position("Level").x
 	self.yPos = go.get_position("character").y
 end
@@ -12,7 +13,7 @@ function update(self, dt)
 	-- Add update code here
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
-	self.yPos = self.yPos + speed*dt
+	self.yPos = self.yPos + self.speed*dt
 
 	-- Get the position of the character
 	local character_position = go.get_position("character")
@@ -56,5 +57,7 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("set_view_projection") then
 		self.view = message.view
 		self.projection = message.projection
+	elseif message_id == hash("set_speed") then
+		self.speed = message.speed
 	end
 end

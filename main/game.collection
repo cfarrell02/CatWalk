@@ -104,7 +104,7 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "Camera"
+  id: "camera"
   data: "components {\n"
   "  id: \"camera1\"\n"
   "  component: \"/scripts/camera.script\"\n"
