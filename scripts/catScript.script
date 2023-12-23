@@ -143,6 +143,7 @@ function on_message(self, message_id, message, sender)
 			go.set_position(go.get_position() + message.normal * message.distance)
 		elseif message.group == hash("pizza") then
 			go.delete(message.other_id)
+			sound.play("#eat", {delay = 0, gain =0.1,pan = 0, speed = 1})
 			msg.post("main:/controller#controller", "score_increment", {amount = 10})
 		end
 	end
