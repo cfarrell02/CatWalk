@@ -9,9 +9,8 @@ shared_state = 1
 input_method = HiddenInputField
 
 [project]
-title = first-game-adventurer
-dependencies#0 = https://github.com/britzl/defold-orthographic/archive/refs/tags/3.2.1.zip
-dependencies#1 = https://github.com/britzl/defold-input/archive/master.zip
+title = Cat Walk
+dependencies#0 = https://github.com/britzl/defold-input/archive/master.zip
 
 [graphics]
 default_texture_min_filter = nearest

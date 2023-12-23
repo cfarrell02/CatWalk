@@ -139,14 +139,33 @@ If you fail to point out where you should get marks, it may affect your grade.
 
 | Grade     | Game Design Doc | Game Config/Setup | Defold Components | Game Progression | Physics |
 | --------- | --------------- | ----------------- | ----------------- | ---------------- | ------- |
-| Starter   |                 |                   |                   |                  |         |
-| Basic     |                 |                   |                   |                  |         |
-| Good      |                 |                   |                   |                  |         |
-| Excellent |                 |                   |                   |                  |         |
+| Starter   | Starter Detail* | Start screen menu implemented |**Basic GUI components, sprites, tilemaps/sources|Single level implemented|Cat has collision with objects|
+| Basic     | Basic Detail*   | Main menu is interactive with options for difficulty, starting and saving/loding |**Intermediate components, animations.|10 roads that are dynamically loaded in to generate procedural world|Collision groups implemented, eg 'car', 'barrier'|
+| Good      | Good Detail*   | High scores and saving/loading implemented| ** Good use of components Factories, game objects, proxies|10 roads that are dynamically loaded in to generate procedural world|cat/car/pizza is kinematic, road tilemaps are static colliders|
+| Excellent | Excellent Detail* | Difficulty levels implemented as mentioned in gdd|** Excellent use of components, Sound|Scores implemented to show off progression through level. With highscore to showcase the challenge|Cat uses raycast to detect if tile can be jumped to, collision groups used to detect this and collision with cars.|
+
+\*See game design doc in `docs/design.md` for grading of GDD.
+
+\*\* It's difficult to mention all the components in a table so here is a list
+- Sprites: Cat, cars, pizza
+- Tilemap/Source: Each road component is its own tilemap that is procedurally loaded in as the game progresses. Cat sprite is also a tilesource
+- GUI: Menu and HUD implemented using GUI.
+- Game Object factories: Each road is generated with a game object factory, they are also removed as the player progresses. Each road also has factories for spawning of pizza and cars.
+- Animations: Cat has jumping and idle animations implemented
+- Game Objects: Cat, car, road(1-10), pizza etc.
+- Sound: Sound implemented for jumping, button pressing, cars have engines and sirens.
+- Collection Proxies: Proxies implemented to load new collections (eg go from launch to main).
 
 ### Additional Comments and Highlights
 
-Here you should highlight where you feel you should get marks, and any other comments you feel are relevant
+Noteworthy Features:
+
+- **Procedural Generation:** The game leverages procedural generation in a basic implementation. It incorporates 10 pre-designed sections of road loaded dynamically as the player advances, offering various random configurations. With 10 available roads, the game presents a massive 10^10 potential combinations in any sequence of 10 roads. This unique implementation ensures an endless and distinctive gaming experience, allowing the game to be played indefinitely.
+
+## References
+
+- [Defold Input](https://github.com/britzl/defold-input) - This library was used for gesture handling. The code related to gestures was developed based on the examples provided in this repository. It's listed as a dependency in the project as the code relies on this library to function.
+
 
 ### Video Link
 

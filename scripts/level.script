@@ -4,7 +4,6 @@ local carSpeed = 80
 
 function init(self)
 	self.carUrls = {}
-	-- Need better system to choose where vehicles spawn
 	spawn_car(self,"Right",vmath.vector3(360,440,.21), carDriveLength, carSpeed)
 	spawn_car(self,"Left",vmath.vector3(860,460,.2), -carDriveLength, -carSpeed*1.2)
 	

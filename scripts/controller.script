@@ -67,7 +67,7 @@ function on_message(self, message_id, message, sender)
 		msg.post(sender, "enable")
 	elseif message_id == hash("proxy_unloaded") then
 		print("Unloaded", sender)
-		-- Additional handling if needed after unloading the proxy
+		
 	elseif message_id == hash("score_update") then
 		self.score = message.score
 		if self.highScore < self.score then
