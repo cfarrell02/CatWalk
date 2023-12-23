@@ -26,6 +26,26 @@ function init(self)
 	
 end
 
+function save(self) 
+	local data_to_save = {
+		highScore = self.highScore,
+		difficulty = self.difficulty
+	}
+	sys.save(sys.get_save_file("game_data", "settings"), data_to_save)
+end
+
+function load(self) 
+	local saved_data = sys.load(sys.get_save_file("game_data", "settings"))
+	if saved_data then
+		self.highScore = saved_data.highScore or 0
+		self.difficulty = saved_data.difficulty or "normal"
+	else
+		self.highScore = 0
+		self.difficulty = "normal"
+	end
+end
+
+
 function update(self)
 	if self.current_proxy == "#startproxy" then
 		msg.post("launchScreen:/gui#menu", "update_high_score",{highScore=self.highScore})
@@ -64,5 +84,9 @@ function on_message(self, message_id, message, sender)
 		
 	elseif message_id == hash("set_difficulty") then
 		self.difficulty = message.difficulty
+	elseif message_id == hash("save") then
+		save(self)
+	elseif message_id == hash("load") then
+		load(self)
 	end
 end
