@@ -17,10 +17,9 @@ The game design is well-suited for mobile devices as shown below:
 - **Traffic Challenges:** Roads are filled with moving vehicles, presenting obstacles that players must carefully maneuver through. The traffic speed increases gradually, adding complexity and challenge to the gameplay.
 - **Environmental Obstacles:** Apart from traffic, there are static environmental obstacles like roadblocks and other barriers that obstruct the cat's path, requiring careful planning to avoid or navigate around.
 - **Dynamic Camera Movement:** The camera continually moves forward, compelling players to keep pace and advance through the game. This feature limits lateral movements, heightening the challenge.
-- **Collectible Pizza Slices:** Pizza slices act as collectibles, rewarding players with 10 points for each slice collected. This incentivizes players to deviate from the direct path, balancing risk and reward.
+- **Collectable Pizza Slices:** Pizza slices act as collectibles, rewarding players with 10 points for each slice collected. This incentivizes players to deviate from the direct path, balancing risk and reward.
 - **Continuous Progression:** Similar to Crossy Road, the game lacks a definitive endpoint. Instead, players strive to achieve higher scores by surviving longer, crossing more roads, and collecting pizzas to increase their scores.
 
-- This game also features slices of pizza as collectibles, providing 10 points to the player and acting as a huge incentive to collect these rather than just progressing through the levels normally.
 
 ## Game Progression
 - **Character Progression:** The game follows a continuous progression model, similar to Crossy Road. There isn't a specific ending, instead, players aim to achieve higher scores and overcome their previous records. This is reflected in the highscore system which can be saved/loaded from the menu.
@@ -32,14 +31,14 @@ The game design is well-suited for mobile devices as shown below:
 
 ### Factories and Dynamic Generation
 
-The game's infinite generation mechanic relies on 10 preset game objects serving as sections of road, which dynamically generate as the player progresses. This dynamic generation extends to cars and pizza within the game, following a similar mechanism. Utilizing factories for these elements enables the game to populate its environment dynamically as the player advances. Despawning of the roads is also implemented as the player passes to ensure an optimised experience.
+The game's infinite generation mechanic relies on 10 preset game objects serving as sections of road, which dynamically generate as the player progresses. This dynamic generation extends to cars and pizza within the game, which follow a similar mechanism. Utilizing factories for these elements enables the game to populate its environment dynamically as the player advances. Despawning of the roads is also implemented as the player passes to ensure an optimised experience.
 
 ### Input
 - **Button Controls:** Menu navigation utilizes buttons, allowing players to interact with various options such as starting the game or accessing settings.
 - **Swipe Gestures:** In-game movement is controlled by swipe gestures; players swipe in desired directions (forward, backward, left, or right) to maneuver the cat character, offering intuitive and responsive gameplay controls.
 
 ### Interactions with Characters and Environment
-- **Main Character Interaction:** The main character, a cat in this game, is the primary focus. To prevent collisions with stationary objects like traffic cones or bins, raycasting is employed. This technique ensures that the cat doesn't walk into obstacles in the landscape. It detects if a collider is in the next tile and blocks movement to that tile.
+- **Main Character Interaction:** The main character, a cat in this game, is the primary focus. To prevent collisions with stationary objects like traffic cones or bins, raycasting is employed. This technique ensures that the cat doesn't walk into obstacles in the landscape. It detects if a collider is in the next tile and blocks movement to that tile if so.
 
 - **Collectible Pizza Interaction:** The cat character interacts with pizza slices scattered across the game environment. Interacting with pizza earns the player 10 points, incentivizing players to collect these items during gameplay.
 
@@ -48,7 +47,7 @@ The game's infinite generation mechanic relies on 10 preset game objects serving
 ### Camera Mechanics
 - **Constant Movement:** The game features a continuously moving camera that progresses at a consistent pace. This mechanic adds urgency to gameplay, compelling players to keep pace and preventing them from lingering in one area for too long.
 
-- **Player Tracking:** The camera is linked to the player's movement; if the player navigates swiftly, the camera catches up to maintain a suitable viewing position. This feature prevents the player from outpacing the camera, ensuring a clear view of the gameplay area.
+- **Player Tracking:** The camera is linked to the player's movement; if the player navigates swiftly, the camera catches up to maintain a suitable viewing position. This feature prevents the player from outpacing the camera, ensuring a clear view of the gameplay area. The camera will also track the player's X axis movements to ensure the player is never out of view.
 
 - **Difficulty Tied Mechanism:** The camera's movement speed is directly associated with the chosen difficulty level. Higher difficulty settings result in faster camera movement, intensifying the gameplay experience and increasing the challenge for the player.
 
@@ -73,14 +72,14 @@ Defold's messaging system is crucial in managing scene transitions and critical 
 
 ## Characters
 - The game primarily focuses on the sole main character - an orange cat. This protagonist is depicted with several animations: an idle state where it calmly observes its surroundings and a jumping animation where it moves to another tile within the game.
-- The character's backstory revolves showcases that it is a stray city cat with a strong inclination towards searching for slices of pizza, thereby embarking on an intriguing and flavorful adventure.
+- The character's backstory showcases that it is a stray city cat with a strong inclination towards searching for slices of pizza, thereby embarking on an intriguing and flavorful adventure.
 
 
 ## Mobile Game Design
 
 - **General Design Principles for Mobile Games:** Mobile game design adheres to several core principles essential for handheld devices. Simple, intuitive controls are crucial for easy interactions, whether through touch, gestures, or other simplified inputs. Short play sessions are key, enabling players to engage in brief bursts of gameplay to avoid losing progress due to interruptions. A clear and intuitive save/load system is also crucial to facilitate seamless gaming experiences. Additionally, a user-friendly interface plays a pivotal role in mobile game design, ensuring accessibility across various screen sizes and enhancing overall user experience.
  
-- **Comparison with Game's Design:** The game effectively incorporates numerous mobile design principles. Its gesture-based controls offer an immersive and intuitive experience, enabling seamless navigation and interaction. Short, fast-paced gameplay aligns with prevalent mobile design principles, ensuring that runs rarely extend for prolonged periods, allowing for quick re-engagement and progress. The emphasis on high scores seamlessly allows for this. Furthermore, the game's straightforward mechanics cater to the rapid pick-up-and-play nature commonly seen in mobile gaming experiences.
+- **Comparison with Game's Design:** The game effectively incorporates numerous mobile design principles. Its gesture-based controls offer an immersive and intuitive experience, enabling seamless navigation and interaction. Short, fast-paced gameplay aligns with mobile design principles, ensuring that runs rarely extend for prolonged periods, allowing for quick re-engagement and progress. The emphasis on high scores seamlessly allows for this. Furthermore, the game's straightforward mechanics cater to the rapid pick-up-and-play nature commonly seen in mobile gaming experiences.
 
 
 - **Suggestions for Mobile Suitability:** To increase suitability for mobile platforms, including more visual feedback into the game could enhance player engagement. Introducing elements that encourage social interaction or competition among players, such as leaderboards, might increase player retention and enjoyment. Also, implementing a dedicated tutorial section at the beginning of the game to familiarize players with the controls and mechanics can ensure a smoother experience.

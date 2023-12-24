@@ -169,7 +169,7 @@ Noteworthy Features:
 
 ### Video Link
 
-Game Explanation and Walkthrough Video Link: 
+Game Explanation and Walkthrough Video Link: https://youtu.be/hS04MJjpm1c
 
 Make your case for where you believe you should get marks, reference the grading rubric where necessary
 
