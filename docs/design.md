@@ -34,7 +34,7 @@ The game design is well-suited for mobile devices as shown below:
 The game's infinite generation mechanic relies on 10 preset game objects serving as sections of road, which dynamically generate as the player progresses. This dynamic generation extends to cars and pizza within the game, which follow a similar mechanism. Utilizing factories for these elements enables the game to populate its environment dynamically as the player advances. Despawning of the roads is also implemented as the player passes to ensure an optimised experience.
 
 ### Input
-- **Button Controls:** Menu navigation utilizes buttons, allowing players to interact with various options such as starting the game or accessing settings.
+- **Button Controls:** Menu navigation utilizes buttons, allowing players to interact with various options such as starting the game or accessing settings, like difficulty/loading.
 - **Swipe Gestures:** In-game movement is controlled by swipe gestures; players swipe in desired directions (forward, backward, left, or right) to maneuver the cat character, offering intuitive and responsive gameplay controls.
 
 ### Interactions with Characters and Environment
